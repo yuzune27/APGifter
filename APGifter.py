@@ -70,7 +70,7 @@ def app_run():
     cid_list = []
 
     print("----------------------------------------")
-    print(f"[{datetime.now():%Y/%m/%d %H:%M:%S}]APGifterを起動しました")
+    print(f"[{datetime.now():%Y/%m/%d %H:%M:%S}]APGifterを起動しました。")
     print("----------------------------------------")
     print("契約回線を取得中……")
     telnum_list = get_telnum()
