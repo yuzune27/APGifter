@@ -1,8 +1,9 @@
-import requests
 import time
 from datetime import datetime
+
+import requests
+
 import settings
-import schedule
 
 
 class APGifter:
@@ -79,7 +80,7 @@ def ref_token():
     settings.os.environ["ACCESS_TOKEN"] = resp["id_token"]
     settings.os.environ["REFRESH_TOKEN"] = resp["refresh_token"]
 
-def app_run(tel1, tel2):
+def app_run():
     line_list = []
     cid_list = []
 
@@ -95,8 +96,7 @@ def app_run(tel1, tel2):
         print(f"{x}: {t}")
         x += 1
     while True:
-        telnum1 = tel1
-        # input("1つ目の回線を選択\n-> "))
+        telnum1 = input("1つ目の回線を選択\n-> ")
         try:
             first_linename = telnum_list[int(telnum1)]["lineName"]
             first_cid = telnum_list[int(telnum1)]["custId"]
@@ -111,8 +111,7 @@ def app_run(tel1, tel2):
             break
     print("--------------------")
     while True:
-        telnum2 = tel2
-        # input("2つ目の回線を選択\n-> "))
+        telnum2 = input("2つ目の回線を選択\n-> ")
         try:
             second_linename = telnum_list[int(telnum2)]["lineName"]
             second_cid = telnum_list[int(telnum2)]["custId"]  # 二つ目のcid
@@ -156,7 +155,7 @@ def app_run(tel1, tel2):
         print(
             f"[{datetime.now():%Y/%m/%d %H:%M:%S}]回線「{line_list[r_count]}」でパケットギフトを発行しました。 ギフトコード：{code_list}")
         time.sleep(5)
-        print(f"[{datetime.now():%Y/%m/%d %H:%M:%S}回線「{linename}」でパケットギフトを受取中……")
+        print(f"[{datetime.now():%Y/%m/%d %H:%M:%S}]回線「{linename}」でパケットギフトを受取中……")
         change_gift(cid, code_list)
         print(f"[{datetime.now():%Y/%m/%d %H:%M:%S}]回線「{linename}」の繰り越し処理が完了しました！")
         r_count -= 1
@@ -167,10 +166,4 @@ def app_run(tel1, tel2):
 
 
 if __name__ == "__main__":
-    schedule.every(23).hours.do(ref_token)
-    schedule.every().monday.at("09:00").do(app_run, 1, 3)
-    schedule.every().monday.at("09:30").do(app_run, 1, 2)
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    app_run()
