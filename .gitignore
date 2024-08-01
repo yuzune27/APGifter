@@ -1,2 +1,4 @@
 *.env
 .idea/
+ts.py
+ts2.py
