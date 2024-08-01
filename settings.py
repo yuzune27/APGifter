@@ -8,3 +8,4 @@ load_dotenv(dotenv_path, encoding="utf-8", verbose=True)
 
 access_token = os.environ.get('ACCESS_TOKEN')
 cid = os.environ.get('CID')
+refresh_token = os.environ.get('REFRESH_TOKEN')
